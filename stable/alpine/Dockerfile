@@ -26,7 +26,6 @@ RUN set -x \
             && KEY_SHA512="e7fa8303923d9b95db37a77ad46c68fd4755ff935d0a534d26eba83de193c76166c68bfe7f65471bf8881004ef4aa6df3e34689c305662750c0172fca5d8552a *stdin" \
             && apk add --no-cache --virtual .cert-deps \
                 openssl \
-                bash \
             && wget -O /tmp/nginx_signing.rsa.pub https://nginx.org/keys/nginx_signing.rsa.pub \
             && if [ "$(openssl rsa -pubin -in /tmp/nginx_signing.rsa.pub -text -noout | openssl sha512 -r)" = "$KEY_SHA512" ]; then \
                 echo "key verification succeeded!"; \
@@ -102,7 +101,7 @@ RUN set -x \
 # variables
     && apk add --no-cache tzdata \
 # Bring in curl and ca-certificates to make registering on DNS SD easier
-    && apk add --no-cache curl ca-certificates \
+    && apk add --no-cache bash curl ca-certificates \
 # forward request and error logs to docker log collector
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
