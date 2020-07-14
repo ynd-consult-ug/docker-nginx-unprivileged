@@ -117,7 +117,8 @@ RUN sed -i 's,listen       80;,listen       8080;,' /etc/nginx/conf.d/default.co
     && chown -R 101:0 /var/cache/nginx \
     && chmod -R g+w /var/cache/nginx \
     && chown -R 101:0 /etc/nginx \
-    && chmod -R g+w /etc/nginx
+    && chmod -R g+w /etc/nginx \
+    && chown -R 101:101 /usr/share/nginx/html
 
 COPY docker-entrypoint.sh /
 COPY 10-listen-on-ipv6-by-default.sh /docker-entrypoint.d
