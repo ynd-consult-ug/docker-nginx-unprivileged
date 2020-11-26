@@ -121,7 +121,7 @@ RUN sed -i 's,listen       80;,listen       8080;,' /etc/nginx/conf.d/default.co
     && chown -R 101:101 /usr/share/nginx/html
 
 COPY docker-entrypoint.sh /
-COPY 10-envsubst-on-templates.sh /docker-entrypoint.d
+COPY 20-envsubst-on-templates.sh /docker-entrypoint.d
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 8080
